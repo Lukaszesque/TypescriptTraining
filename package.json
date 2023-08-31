@@ -1,5 +1,11 @@
 {
   "devDependencies": {
-    "@types/jquery": "^3.5.17"
+    "@types/jquery": "^3.5.17",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "browserify": "^17.0.0",
+    "commonjs": "^0.0.1"
   }
 }
