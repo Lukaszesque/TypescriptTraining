@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/jquery": "^3.5.18",
     "@types/lodash": "^4.14.197",
     "css-loader": "^6.8.1",
     "html-webpack-plugin": "^5.5.3",
