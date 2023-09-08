@@ -7,28 +7,34 @@ export function itemClicked(elementid: string)
     let row=elementToAppend[0];
     let column=elementToAppend[1];
 
-    if (!Memory.Moves.includes([5]+column)) 
+    if (!Memory.AllMoves.includes([5]+column)) 
     {
         elementToAppend = [5]+column
     }
 
     for (let i = 5; i >= 0; i--) 
     {
-        if (!Memory.Moves.includes([i]+column)) 
+        if (!Memory.AllMoves.includes([i]+column)) 
         {
             elementToAppend = [i]+column
             break;
         }
     }
 
-    if (Memory.Moves.includes(elementToAppend)) return;
+    if (Memory.AllMoves.includes(elementToAppend)) return;
 
-    if (isYellowTurn(Memory.Moves.length)) 
+
+    var isYellow: boolean = isYellowTurn(Memory.AllMoves.length)
+    if (isYellow) {
     AppendElement(elementToAppend, true);
-    else
+    Memory.YellowMoves.push(elementToAppend);
+    }
+    else {
     AppendElement(elementToAppend, false)
+    Memory.RedMoves.push(elementToAppend);
+    }
 
-    Memory.Moves.push(elementToAppend);
+    Memory.AllMoves.push(elementToAppend);
 }
 
 export function loadGrid() 
@@ -80,5 +86,46 @@ function isYellowTurn(totalMoves: number) : boolean
 
 class Memory 
 {
-    static Moves: string[] = [];
+    static AllMoves: string[] = [];
+
+    static YellowMoves: string[] = [];
+
+    static RedMoves: string[] = [];
+}
+
+function CheckVictoryConditions(moves: string[]): boolean 
+{
+    var rows: string = moves.map(x => x[0]).sort().join();
+    var columns: string = moves.map(x => x[1]).sort().join();
+
+    var straightVictoryCriteria: string[] = ["0123", "1234", "2345", "3456"];
+
+    straightVictoryCriteria.forEach(criterium => {
+        if (rows.includes(criterium)) return true;
+        if (columns.includes(criterium)) return true;
+    });
+
+    return false;
+}
+
+function CalculateDiagonalVictoryConditions() : string[]
+{
+    let result: string[] = [];
+    RightDown(result);
+
+    return result;
+}
+
+function RightDown(result: string[]) 
+{
+    for (var i=0; i<4; i++) 
+    {
+        for(var j=0; j<4;j++) 
+        {
+            result.push(`${j}${j + i}$`);
+            //TODO: 
+            //The output should be an array of classes or arrays.
+            //the arrays will need to go up to 6 in value but can be only up to 4 in length
+        }
+    }
 }
