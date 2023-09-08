@@ -126,6 +126,7 @@ function RightDown(result: string[])
             //TODO: 
             //The output should be an array of classes or arrays.
             //the arrays will need to go up to 6 in value but can be only up to 4 in length
+            //Remember - you need to call the victory conditions method
         }
     }
 }
